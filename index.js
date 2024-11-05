@@ -5,7 +5,7 @@ import fs from 'fs'
 const url_azure = "https://dev.azure.com/acto-solucoes/IMASUL-MS/_apis/wit/wiql/c70d0c7d-c4a6-4c18-9a8b-1a479bbb7f00?api-version=7.0"
 
 const user = ""
-const password = "kopjas7bzzz7zicijlm2sk6iuykfgligsudfl2b6k2mptpt6x7kq"
+const password = ""
 
 const outputFile = "output.csv";
 
