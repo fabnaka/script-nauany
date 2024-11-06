@@ -1,8 +1,9 @@
 import axios from "axios";
 import Papa from 'papaparse'
 import fs from 'fs'
+import {format} from 'date-fns'
 
-const url_azure = "https://dev.azure.com/acto-solucoes/IMASUL-MS/_apis/wit/wiql/c70d0c7d-c4a6-4c18-9a8b-1a479bbb7f00?api-version=7.0"
+const url_azure = ""
 
 const user = ""
 const password = ""
@@ -39,10 +40,15 @@ async function chamadaApiPrincipal() {
 
         if(resp2.data) {
           items_array.push({
+            id: resp2.data.id,
             titulo: resp2.data.fields["System.Title"],
             descricao: resp2.data.fields["System.Description"].replace('<div>','').replace('</div>',''),
             complexidade: resp2.data.fields["Custom.Complexity"],
-            area: resp2.data.fields["System.AreaPath"]
+            area: resp2.data.fields["System.AreaPath"],
+            fechado_por: resp2.data.fields["Microsoft.VSTS.Common.ClosedBy"].displayName,
+            data_criacao: format( resp2.data.fields["System.CreatedDate"], "dd/MM/yyyy HH:mm:ss" ) ,
+            data_fechamento: format( resp2.data.fields["Microsoft.VSTS.Common.ClosedDate"], "dd/MM/yyyy HH:mm:ss" ) ,
+            atividade: resp2.data.fields["Microsoft.VSTS.Common.Activity"] ? resp2.data.fields["Microsoft.VSTS.Common.Activity"] : ""
           })
         }
       }
